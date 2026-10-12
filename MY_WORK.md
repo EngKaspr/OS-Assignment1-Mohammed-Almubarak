@@ -29,11 +29,11 @@
 
 | Field | Your Answer |
 |-------|-------------|
-| **Full Name** | [Write your full name here] |
-| **Student ID** | [Write your student ID here] |
-| **University Email** | [yourid]@std.psau.edu.sa |
-| **GitHub Username** | [your-github-username] |
-| **Repository Link** | [Paste your repository link here] |
+| **Full Name** | [Mohammed Fahad Almubarak] |
+| **Student ID** | [446050018] |
+| **University Email** | [446050018@std.psau.edu.sa|
+| **GitHub Username** | [EngKaspr] |
+| **Repository Link** | [(https://github.com/makopt/OS-Assignment1-Starter-481)] |
  
 ---
 
@@ -128,7 +128,66 @@
 ---
 
 ## Your Development Log
+### Entry 1 - [October 1, 2026, 4:00 PM]
+**What I did**: Set up the repository and analyzed the starter code.
+**Details**:
+- Forked and cloned the repository.
+- Added my student ID (`446050018`) to line 150 in `SchedulerSimulation.java`.
+- Read through `Process.java` to understand the round-robin logic.
+- Ran the initial simulation to verify everything compiled correctly.
+**Challenges**: Took some time to understand how `processQueue` and `processMap` were linked.
+**Solution**: Used `System.out.println()` statements to track the variables.
+**Time spent**: 45 minutes
 
+---
+
+### Entry 2 - [October 3, 2026, 5:30 PM]
+**What I did**: Implemented Feature 1 (Process Priority).
+**Details**:
+- Added an `int priority` field to `Process.java` with a getter method.
+- Updated the `Process` constructor to accept this new parameter.
+- Modified the main loop in `SchedulerSimulation.java` to generate a random priority between 1 and 10.
+- Updated the print output to show the priority.
+**Challenges**: Forgot to update the `Process` instantiation in `main`, causing a constructor mismatch error.
+**Solution**: Updated the call in `main` to pass the new `priority` argument.
+**Time spent**: 50 minutes
+
+---
+
+### Entry 3 - [October 5, 2026, 8:15 PM]
+**What I did**: Implemented Feature 2 (Context Switch Counter).
+**Details**:
+- Added a `static int switchCount = 0;` variable to the simulation class.
+- Incremented the counter right below `currentThread.start()`.
+- Added a formatted print statement at the end of the simulation to display the total switches.
+**Challenges**: Initially incremented the counter inside the `catch` block by mistake.
+**Solution**: Moved the increment logic to the correct spot before `Thread.join()`.
+**Time spent**: 30 minutes
+
+---
+
+### Entry 4 - [October 8, 2026, 6:00 PM]
+**What I did**: Implemented Feature 3 (Waiting Time Tracking).
+**Details**:
+- Added `creationTime`, `totalWaitingTime`, and `lastStopTime` to `Process.java`.
+- Initialized them in the constructor.
+- Added math logic inside the `run()` method: `totalWaitingTime += (System.currentTimeMillis() - lastStopTime)`.
+- Updated `lastStopTime` before the thread yields.
+**Challenges**: The waiting time calculations were initially printing as 0.
+**Solution**: Traced the code and realized I put the `lastStopTime` update inside the exception catch block. Moved it to the end of the `run()` block.
+**Time spent**: 90 minutes
+
+---
+
+### Entry 5 - [October 10, 2026, 2:00 PM]
+**What I did**: Finalized documentation and summary table.
+**Details**:
+- Created getter methods for `waitingTime` and `turnaroundTime`.
+- Added a formatted summary table at the end of `main` to iterate through the `processMap` and print the final stats.
+- Filled out the `MY_WORK.md` file with student info and reflection answers.
+**Challenges**: Formatting the table so the columns align perfectly.
+**Solution**: Used `String.format("%-15s", ...)` for consistent spacing.
+**Time spent**: 40 minutes
 ### Entry 1 - [Date and Time]
 **What I did**:
 
@@ -237,7 +296,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[Before this assignment, I only knew the basic theory of threads from our lectures. Working on this code showed me exactly how the Runnable interface makes a class ready to run as a thread. I learned that calling Thread.start() is what actually puts the process in motion. The most surprising part for me was using Thread.join(). I realized it forces the main program to stop and wait for the current thread to finish its time slice. I also saw how Thread.sleep() is used to simulate the actual CPU processing time in milliseconds. It finally made sense how a single-core CPU switches between tasks rapidly without running them at the exact same time.]
 
 ## Question 2: What was the most challenging part of this assignment?
 
@@ -245,7 +304,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+The hardest part of this assignment for me was definitely Feature 3, specifically tracking the waiting time. I understood the math behind it, but translating that into the run() method was very confusing at first. I struggled with where exactly to place the lastStopTime update variable. In my early attempts, I almost put it inside the catch block for interrupted exceptions. If I left it there, the time would only update when the thread crashed, which would ruin the final calculations. Figuring out the exact lifecycle of the thread to place the calculation safely outside the try-catch block took a lot of my time. It was a frustrating but very educational debugging experience.]
 
 ## Question 3: How did you overcome the challenges you faced?
 
@@ -253,7 +312,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[To fix the issues I faced, I had to slow down and trace the code line by line. I started by adding several System.out.println() statements inside the run() method to see exactly when variables were updating. This debugging step quickly showed me that my time values were not changing as I expected. After that, I re-read the assignment instructions and looked closely at the existing loop structure. I also took a short break and tried to write the math logic on a piece of paper before coding it again. Testing small changes one by one instead of writing the whole feature at once really saved me. Once the final summary table printed the correct math, I knew I had finally solved it.]
 
 ## Question 4: How can you apply multithreading concepts in real-world applications?
 
@@ -261,7 +320,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[Working on this simulation made me realize how multithreading is used in almost every application I use daily. For example, when I play heavy PC games, one thread is calculating the physics while another is rendering the graphics. In web browsers like Chrome, opening multiple tabs without freezing the whole program relies entirely on managing different threads. I can also see this in mobile apps, where the user interface stays smooth on one thread while background threads download data from the internet. As a software engineering student, understanding this helps me write applications that don't freeze when doing heavy tasks. It showed me that good user experience depends heavily on smart thread management.]
 
 ### Optional: What would you like to learn more about?
 
@@ -293,7 +352,7 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[A process is an independent program running in its own memory space, while a thread is a smaller execution unit within that process sharing the same memory. In this assignment, creating a whole new operating system process for every small task would be extremely slow and consume too much memory overhead. Instead, we used threads (new Thread(process)) inside a single Java process because threads are much lighter, faster to create, and can easily share data like the switchCount variable. It's important to note that our Process.java class is just a simulated concept of a task; the actual execution is handled by the real Java thread we instantiate in the addProcessToQueue() method.]
 
 ## Question 2: Ready Queue Behavior
 
@@ -305,7 +364,7 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[In Round-Robin scheduling, if a process doesn't finish its total burst time within the allowed time quantum, it is temporarily paused. The scheduler takes it out of the CPU and puts it at the back of the ready queue to wait for its next turn. This re-queuing is crucial for fairness, as it prevents a single massive process from hogging the CPU and starving smaller processes. For example, in my simulation output, a process with a large burst time like P2 had to be re-queued multiple times, showing up as "yields CPU for context switch" before it finally finished.]
 
 Example from my output:
 ```
@@ -323,15 +382,15 @@ Example from my output:
 
 **Your Answer:** *(3-5 sentences overall; one short explanation per state)*
 
-1. **New**: [When is P1 in the New state?]
+1. **New**: [P1 enters the New state exactly when we create the thread object inside addProcessToQueue() using Thread thread = new Thread(process);, before it actually starts running.]
 
-2. **Runnable**: [When does P1 become Runnable?]
+2. **Runnable**: [P1 becomes Runnable when the scheduler in the main loop calls currentThread.start(), signaling the JVM that the thread is ready to be executed by the CPU.]
 
-3. **Running**: [When is P1 Running?]
+3. **Running**: [is in the Running state when it is actively executing inside its run() method, doing the math to calculate its runTime and printing its quantum progress bar.]
 
-4. **Waiting**: [When and why would a thread be Waiting?]
+4. **Waiting**: [The main scheduler thread goes into a Waiting state when it calls currentThread.join(), waiting for P1 to finish its quantum. Meanwhile, P1 itself enters a Timed Waiting state during Thread.sleep() to simulate processing time.]
 
-5. **Terminated**: [When is P1 Terminated?]
+5. **Terminated**: [P1 is Terminated when it successfully finishes its entire run() method loop and its remaining time hits zero, meaning the thread completely exits the method.]
 
 ## Question 4: Real-World Applications
 
