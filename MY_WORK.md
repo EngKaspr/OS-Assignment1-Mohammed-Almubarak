@@ -364,7 +364,15 @@ The hardest part of this assignment for me was definitely Feature 3, specificall
 
 **Your Answer:** *(3-5 sentences)*
 
-[In Round-Robin scheduling, if a process doesn't finish its total burst time within the allowed time quantum, it is temporarily paused. The scheduler takes it out of the CPU and puts it at the back of the ready queue to wait for its next turn. This re-queuing is crucial for fairness, as it prevents a single massive process from hogging the CPU and starving smaller processes. For example, in my simulation output, a process with a large burst time like P2 had to be re-queued multiple times, showing up as "yields CPU for context switch" before it finally finished.]
+[In Round-Robin scheduling, if a process doesn't finish its total burst time within the allowed time quantum, it is temporarily paused. The scheduler takes it out of the CPU and puts it at the back of the ready queue to wait for its next turn. This re-queuing is crucial for fairness, as it prevents a single massive process from hogging the CPU and starving smaller processes. For example, in my simulation output, process P1 used its full 4000ms quantum but still had 761ms remaining. It yielded the CPU and was added to the back of the ready queue before it could finish later.
+
+Example from my output:
+` ` `text
+⏸ P1 completed quantum 4000ms | Overall progress: [██████████████████░░░░] 84%
+Remaining time: 761ms
+↺ P1 yields CPU for context switch
+➕ P1 (Priority: 5) added to ready queue | Burst time: 4761ms
+` ` `]
 
 Example from my output:
 ```
