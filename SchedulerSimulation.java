@@ -31,21 +31,39 @@ int priority;
     private int burstTime; // Total time the process requires to complete (in milliseconds)
     private int timeQuantum; // Time slice (time quantum) allowed per CPU access (in milliseconds)
     private int remainingTime; // Time left for the process to finish its execution
-
+    long creationTime;
+    long totalWaitingTime;
+    long lastStopTime;
     // Constructor to initialize the process with name, burst time, and time quantum
   public Process(String name, int burstTime, int timeQuantum, int priority) {
         this.name = name;
         this.burstTime = burstTime;
       this.priority = priority; // تحديد 
+      // تسجيل وقت البداية
+        this.creationTime = System.currentTimeMillis();
+        this.lastStopTime = this.creationTime;
+        this.totalWaitingTime = 0;
         this.timeQuantum = timeQuantum;
         this.remainingTime = burstTime; // Initially, remaining time is equal to the burst time
     }
 public int getPriority() {
     return priority;
 }
+    // قراءة وقت الانتظار
+    public long getWaitingTime() {
+        return totalWaitingTime;
+    }
+
+    // قراءة وقت الدوران
+    public long getTurnaroundTime() {
+        return totalWaitingTime + getBurstTime();
+    }
     // This method will be called when the thread for this process is started
     @Override
     public void run() {
+        // حساب وقت الانتظار
+        long currentTime = System.currentTimeMillis();
+        totalWaitingTime += (currentTime - lastStopTime);
         // Simulate running for either the time quantum or remaining time, whichever is smaller
         int runTime = Math.min(timeQuantum, remainingTime); // Run for the smaller of the two times
         
@@ -83,7 +101,8 @@ public int getPriority() {
                           " completed quantum " + Colors.BRIGHT_YELLOW + runTime + "ms" + Colors.RESET + 
                           " │ Overall progress: " + overallProgressBar);
         System.out.println(Colors.MAGENTA + "     Remaining time: " + remainingTime + "ms" + Colors.RESET);
-        
+               // تحديث وقت التوقف
+        lastStopTime = System.currentTimeMillis();
         // If the process still has remaining time, it yields CPU for the next process
         if (remainingTime > 0) {
             System.out.println(Colors.BLUE + "  ↻ " + Colors.CYAN + name + Colors.RESET + 
@@ -287,6 +306,14 @@ static int switchCount = 0;
                           Colors.RESET + "\n");
         System.out.println(Colors.BRIGHT_YELLOW + "Total context switches: " + switchCount + Colors.RESET);
          // طبعااعهه
+        // طباعة جدول الانتظار 
+        System.out.println("\n" + Colors.BOLD + Colors.CYAN + "--- Waiting and Turnaround Times ---" + Colors.RESET);
+        System.out.println(String.format("%-15s %-15s %-15s %-15s", "Process", "Burst Time", "Waiting Time", "Turnaround Time"));
+        for (Thread t : processMap.keySet()) {
+            Process p = processMap.get(t);
+            System.out.println(String.format("%-15s %-15sms %-15sms %-15sms", p.getName(), p.getBurstTime(), p.getWaitingTime(), p.getTurnaroundTime()));
+        }
+        System.out.println(Colors.BOLD + Colors.CYAN + "------------------------------------" + Colors.RESET);
     }
     
     // Method to add a process to the queue and map, while printing a "ready" message
