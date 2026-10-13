@@ -33,13 +33,13 @@
 | **Student ID** | [446050018] |
 | **University Email** | [446050018@std.psau.edu.sa|
 | **GitHub Username** | [EngKaspr] |
-| **Repository Link** | [(https://github.com/makopt/OS-Assignment1-Starter-481)] |
+| **Repository Link** | [https://github.com/EngKaspr/OS-Assignment1-Mohammed-Almubarak] |
  
 ---
 
 ## 🎥 Video Link
 
-**Video Link**: [Paste your video link here]
+**Video Link**: [(https://drive.google.com/file/d/1UZFJOrayTX6fOYHpAWiF_rredRka7dsx/view?usp=sharing)]
 
 > ⚠️ **WARNING:** The video must be **publicly accessible** ("Anyone with the link can view") on **Google Drive**, **YouTube (Unlisted or Public)** or any other cloud file-sharing system. A private, restricted or broken link counts as a **missing video (-1 mark)**.
 >
